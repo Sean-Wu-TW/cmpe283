@@ -1,9 +1,11 @@
+## I'm the only team member :/
+
 ## Steps to replicate assignment 1:
 
-Set up gcp vm instance
+### Prerequisite: gcp vm instance up and spinning.
 
 ```shell
-$ uname -mrs 
+$ uname -mrs # or uname -a
 # Linux 4.19.0-14-cloud-amd64 x86_64
 
 $ sudo apt-get update  
@@ -18,44 +20,77 @@ $ cd linux
 $ cp -v /boot/config-$(uname -r) .config    # load pre-exist config file into new VM
 # change .config file field CONFIG_SYSTEM_TRUSTED_KEYS = ""
 
-$ make menuconfig # configure new vm
-# or
-$ make xconfig 
-# or
-$ make gconfig
+$ make oldconfig 
 
-
-
-$ make -j 4 # use 4 cores to compile faster
+$ make -j 2 # use 2 cores to compile faster
             # press enter all the way
-
-
-$ apt-get bc # if receive --> /bin/sh: 1: bc: not found
+            
+$ sudo apt-get install bc   # if receive this error --> /bin/sh: 1: bc: not found
 
 $ sudo make modules_install 
 
 $ sudo make install       
 
-# reboot, on GCP reset
+# or even better:
+# make -j 2 modules && make -j 2 && sudo make modules_install && sudo make install
+
+$ sudo reboot    # reboot, on GCP reset
 
 $ uname -mrs 
-# Linux 5.12.0-rc6+ x86_64
+# Linux 4.20.0-rc6+ x86_64
 
-# put 'cmpe283-1.c' and 'Makefile' into whichever folder, then cd into it
+# put 'cmpe283-1.c' and 'Makefile' into "ass1" folder, then cd into it
 
 $ make              # compile module, some .ko/.o files generated
 
-$ insmod cmpe283.ko # load module
+$ insmod cmpe283-1.ko # load module
 
 $ dmesg             # see output
 
-$ rmmod cmpe283.ko  # unload module
+$ rmmod cmpe283-1.ko  # unload module
 
 ```
 
 
 
+### Some problems I've faced:
 
+1.  Seems like the newer versions of kernel does not allow insertion of unsigned modules, which leads to an error(unable to `insmod`).
+2.  Same as 1, newer kernel(v5.x or above) could not `make` a module, whereas in v.4.x only leads to warning.(See homework how to video). `.ko` kernel object file not generated.
+
+
+
+![1](./images/1.png)
+
+![2](./images/2.png)
+
+![3](./images/3.png)
+
+![4](./images/4.png)
+
+![5](./images/5.png)
+
+![6](./images/6.png)
+
+![7](./images/7.png)
+
+![8](./images/8.png)
+
+![10](./images/10.png)
+
+![11](./images/11.png)
+
+![12](./images/12.png)
+
+![13](./images/13.png)
+
+![16](./images/16.png)
+
+![17](./images/17.png)
+
+![18](./images/18.png)
+
+![19](./images/19.png)
 
 
 
@@ -91,5 +126,19 @@ If you do this, ensure that you modify the configuration to set:
 
 ```
 CONFIG_SYSTEM_TRUSTED_KEYS = ""
+```
+
+##### If can't insert module
+
+https://stackoverflow.com/questions/24975377/kvm-module-verification-failed-signature-and-or-required-key-missing-taintin
+
+```shell
+CONFIG_MODULE_SIG=n
+CONFIG_MODULE_SIG_ALL=n
+# CONFIG_MODULE_SIG_FORCE is not set 
+# CONFIG_MODULE_SIG_SHA1 is not set
+# CONFIG_MODULE_SIG_SHA224 is not set
+# CONFIG_MODULE_SIG_SHA256 is not set
+# CONFIG_MODULE_SIG_SHA384 is not set
 ```
 

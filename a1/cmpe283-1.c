@@ -11,11 +11,11 @@
  * Model specific registers (MSRs) by the module.
  * See SDM volume 4, section 2.1
  */
-#define IA32_VMX_PINBASED_CTLS	 0x481
-#define IA32_VMX_PROCBASED_CTLS  0x482
+#define IA32_VMX_PINBASED_CTLS 0x481
+#define IA32_VMX_PROCBASED_CTLS 0x482
 #define IA32_VMX_PROCBASED_CTLS2 0x48B
-#define IA32_VMX_EXIT_CTLS       0x483
-#define IA32_VMX_ENTRY_CTLS      0x484
+#define IA32_VMX_EXIT_CTLS 0x483
+#define IA32_VMX_ENTRY_CTLS 0x484
 
 /*
  * struct caapability_info
@@ -65,8 +65,8 @@ struct capability_info ProcBased[21] = {
 	{28, "Use MSR bitmaps"},
 	{29, "MONITOR exiting"},
 	{30, "PAUSE exiting"},
-	{31, "Activate secondary controls"},
-}
+	{31, "Activate secondary controls"}
+};
 
 
 struct capability_info ProcBased2[27] = {
@@ -81,7 +81,7 @@ struct capability_info ProcBased2[27] = {
 	{7, "Unrestricted guest"},
 	{8, "APIC-register virtualization"},
 	{9, "Virtual-interrupt delivery"},
-	{10, "PAUSE-loop exiting"}
+	{10, "PAUSE-loop exiting"},
 	{11, "RDRAND exiting"},
 	{12, "Enable INVPCID"},
 	{13, "Enable VM functions"},
@@ -99,6 +99,7 @@ struct capability_info ProcBased2[27] = {
 	{26, "Enable user wait and pause"},
 	{28, "Enable ENCLV exiting"}
 };
+
 
 struct capability_info Exit[14] = {
 
@@ -118,6 +119,7 @@ struct capability_info Exit[14] = {
 	{29, "Load PKRS"}
 };
 
+
 struct capability_info Entry[12] = {
 	
 	{2, "Load debug controls"},
@@ -131,10 +133,8 @@ struct capability_info Entry[12] = {
 	{17, "Conceal VMX from PT"},
 	{18, "Load IA32_RTIT_CTL"},
 	{20, "Load CET state"},
-	{22, "Load PKRS"},
+	{22, "Load PKRS"}
 };
-
-
 /*
  * report_capability
  *
@@ -182,30 +182,34 @@ detect_vmx_features(void)
 	pr_info("Pinbased Controls MSR: 0x%llx\n",
 		(uint64_t)(lo | (uint64_t)hi << 32));
 	report_capability(pinbased, 5, lo, hi);
-
+	
 	/* Procbased controls */
-	rdmsr(IA32_VMX_PINBASED_CTLS, lo, hi);
-	pr_info("Pinbased Controls MSR: 0x%llx\n",
+	rdmsr(IA32_VMX_PROCBASED_CTLS, lo, hi);
+	pr_info("Procbased Controls MSR: 0x%llx\n",
 		(uint64_t)(lo | (uint64_t)hi << 32));
 	report_capability(ProcBased, 21, lo, hi);
 
-	/* Procbased2 controls */
-	rdmsr(IA32_VMX_PINBASED_CTLS, lo, hi);
-	pr_info("Pinbased Controls MSR: 0x%llx\n",
+	
+	/* Procbased secondary controls */
+	rdmsr(IA32_VMX_PROCBASED_CTLS2, lo, hi);
+	pr_info("Procbased Secondary Controls MSR: 0x%llx\n",
 		(uint64_t)(lo | (uint64_t)hi << 32));
 	report_capability(ProcBased2, 27, lo, hi);
 
-	/* Exits */
-	rdmsr(IA32_VMX_PINBASED_CTLS, lo, hi);
-	pr_info("Pinbased Controls MSR: 0x%llx\n",
+	
+	/* Exit controls */
+	rdmsr(IA32_VMX_EXIT_CTLS, lo, hi);
+	pr_info("Exit Controls MSR: 0x%llx\n",
 		(uint64_t)(lo | (uint64_t)hi << 32));
 	report_capability(Exit, 14, lo, hi);
 
-	/* Entries */
-	rdmsr(IA32_VMX_PINBASED_CTLS, lo, hi);
-	pr_info("Pinbased Controls MSR: 0x%llx\n",
+	
+	/* Entry controls */
+	rdmsr(IA32_VMX_ENTRY_CTLS, lo, hi);
+	pr_info("Entry Controls MSR: 0x%llx\n",
 		(uint64_t)(lo | (uint64_t)hi << 32));
 	report_capability(Entry, 12, lo, hi);
+
 
 }
 
