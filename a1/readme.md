@@ -2,7 +2,9 @@
 
 ## Steps to replicate assignment 1:
 
-### Prerequisite: gcp vm instance up and spinning.
+### Prerequisite: gcp vm instance up and spinning. 
+
+### https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances
 
 ```shell
 $ uname -mrs # or uname -a
@@ -17,8 +19,14 @@ $ sudo apt-get install build-essential libncurses-dev bison flex libssl-dev libe
 $ git clone https://github.com/torvalds/linux.git
 
 $ cd linux
+
+$ git checkout v4.20                        # use version 4.20 to avoid errors
+
 $ cp -v /boot/config-$(uname -r) .config    # load pre-exist config file into new VM
-# change .config file field CONFIG_SYSTEM_TRUSTED_KEYS = ""
+# change .config file field 
+# CONFIG_SYSTEM_TRUSTED_KEYS = "" 
+# CONFIG_MODULE_SIG=n 
+# CONFIG_MODULE_SIG_ALL=n
 
 $ make oldconfig 
 
