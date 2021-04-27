@@ -16,7 +16,7 @@ $ sudo apt-get upgrade
 
 $ sudo apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev git
 
-$ git clone https://github.com/torvalds/linux.git
+$ git clone https://github.com/Sean-Wu-TW/linux.git
 
 $ cd linux
 
