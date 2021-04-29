@@ -2,6 +2,8 @@
 
 The Linux source codes that I've modified are in `283` branch.
 
+https://github.com/Sean-Wu-TW/linux/tree/cmpe283-v5.10-rc1
+
 
 
 
