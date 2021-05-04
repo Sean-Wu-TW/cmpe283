@@ -14,7 +14,7 @@ $ sudo apt-get update
 
 $ sudo apt-get upgrade
 
-$ sudo apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev git
+$ sudo apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev git bc
 
 $ git clone https://github.com/Sean-Wu-TW/linux.git
 
@@ -40,12 +40,14 @@ $ sudo make modules_install
 $ sudo make install       
 
 # or even better:
-# make -j 8 modules && make -j 8 && sudo make modules_install && sudo make install
+# make -j 16 modules && make -j 16 && sudo make modules_install && sudo make install
 
 $ sudo reboot    # reboot, on GCP reset
 
 $ uname -mrs 
 # Linux 4.20.0-rc6+ x86_64
+
+$ grep -cw vmx /proc/cpuinfo    # If greater than 0 then virt enabled.
 
 # put 'cmpe283-1.c' and 'Makefile' into "ass1" folder, then cd into it
 
