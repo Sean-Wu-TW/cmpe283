@@ -40,7 +40,7 @@ $ sudo make modules_install
 $ sudo make install       
 
 # or even better:
-# make -j 16 modules && make -j 16 && sudo make modules_install && sudo make install
+# make -j 8 modules && make -j 8 && sudo make modules_install && sudo make install
 
 $ sudo reboot    # reboot, on GCP reset
 
