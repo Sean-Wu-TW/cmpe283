@@ -77,5 +77,10 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 
 
 
+### Problems I've ran into:
 
+-   I tried to declare `exit_counts` in `cpuid.c` but failed, kept receiving undeclare error, then I declared it in the header file of cupid.
+-   Got stuck in 640 x 480 Graphic mode vm when trying to start a nested vm to test cpuid.
+
+![Screen Shot 2021-05-10 at 10.00.13 AM](./error.png)
 
