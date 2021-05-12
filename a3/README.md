@@ -6,6 +6,8 @@
 - Have a working assignment 2
 - Modify the kvm_emulate_cpuid function inside cpuid.c to add a 0x4ffffffe block
 
+### I was not able to fix and get my guest VM running bc of graphics card problem(see below), so in order to answer the the assignment questions I ran my friend's code who is not taking CMPE283 this semester.
+
 #### Comment on the frequency of exits – does the number of exits increase at a stable rate?
 
 The number of exits does not seems to increase at a stable rate. 
