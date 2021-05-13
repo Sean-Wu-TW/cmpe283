@@ -5,6 +5,7 @@
 ### 2. Steps to finish this assignemt:
 - Have a working assignment 2
 - Modify the kvm_emulate_cpuid function inside cpuid.c to add a 0x4ffffffe block
+- Run a nested VM, follow the steps https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances
 
 ### I was not able to fix and get my guest VM running bc of graphics card problem(see below), so in order to answer the the assignment questions I ran my friend's code who is not taking CMPE283 this semester.
 
@@ -106,4 +107,6 @@ Install BIOS package:
 
 Then when starting nested vm, specify the device:
 `-nographic -device sga`
+For example:
+`sudo qemu-system-x86_64 -enable-kvm -hda debian_squeeze_amd64_standard.qcow2 -m 512 -net nic -net tap,ifname=tap0,script=no -nographic -device sga`
 
