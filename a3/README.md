@@ -103,10 +103,10 @@ https://stackoverflow.com/questions/6710555/how-to-use-qemu-to-run-a-non-gui-os-
 
 Down below:
 Install BIOS package:
-` apt install sgabios  `
+` apt install sgabios `  
 
 Then when starting nested vm, specify the device:
-`-nographic -device sga`
+`-nographic -device sga`  
 For example:
 `sudo qemu-system-x86_64 -enable-kvm -hda debian_squeeze_amd64_standard.qcow2 -m 512 -net nic -net tap,ifname=tap0,script=no -nographic -device sga`
 
