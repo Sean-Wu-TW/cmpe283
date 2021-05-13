@@ -96,3 +96,14 @@ extern u32 kvm_cpu_caps[NR_KVM_CPU_CAPS] __read_mostly;
 
 ![Screen Shot 2021-05-10 at 10.00.13 AM](./error.png)
 
+
+### Found a post might solve this problem:
+https://stackoverflow.com/questions/6710555/how-to-use-qemu-to-run-a-non-gui-os-on-the-terminal
+
+Down below:
+Install BIOS package:
+` apt install sgabios  `
+
+Then when starting nested vm, specify the device:
+`-nographic -device sga`
+
