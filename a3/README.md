@@ -110,3 +110,6 @@ Then when starting nested vm, specify the device:
 For example:
 `sudo qemu-system-x86_64 -enable-kvm -hda debian_squeeze_amd64_standard.qcow2 -m 512 -net nic -net tap,ifname=tap0,script=no -nographic -device sga`
 
+And now I'm stuck here:
+
+![error2](./error2.png)
